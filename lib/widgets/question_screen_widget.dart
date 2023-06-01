@@ -105,7 +105,6 @@ class QuestionScreenWidget extends StatefulWidget {
 }
 
 class _QuestionScreenWidgetState extends State<QuestionScreenWidget> {
-  // bool _selected = false;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
