@@ -105,6 +105,7 @@ class QuestionScreenWidget extends StatefulWidget {
 }
 
 class _QuestionScreenWidgetState extends State<QuestionScreenWidget> {
+  // bool _selected = false;
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
@@ -124,40 +125,72 @@ class _QuestionScreenWidgetState extends State<QuestionScreenWidget> {
           ),
           child: Column(
             children: [
-              Text(
-                question.question,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(10),
+                  Text(
+                    question.question,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-                height: 150,
-                width: 300,
-                clipBehavior: Clip.antiAlias,
-                child: Image(
-                  image: AssetImage(question.imageURL),
-                  fit: BoxFit.fill,
-                  height: double.infinity,
-                  width: double.infinity,
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-            ],
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+                    ),
+                    height: 150,
+                    width: 300,
+                    clipBehavior: Clip.antiAlias,
+                    child: Image(
+                      image: AssetImage(question.imageURL),
+                      fit: BoxFit.fill,
+                      height: double.infinity,
+                      width: double.infinity,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ] +
+                question.answers.map((answer) {
+                  return FruitCheckbox(
+                    answer: answer,
+                  );
+                }).toList(),
           ),
         );
       },
+    );
+  }
+}
+
+class FruitCheckbox extends StatefulWidget {
+  final Answer answer;
+  const FruitCheckbox({super.key, required this.answer});
+
+  @override
+  State<FruitCheckbox> createState() => _FruitCheckboxState();
+}
+
+class _FruitCheckboxState extends State<FruitCheckbox> {
+  bool _selected = false;
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Checkbox(
+          value: _selected,
+          onChanged: (bool? value) {
+            setState(() {
+              _selected = value ?? false;
+            });
+          }),
+      title: Text(
+        widget.answer.answer,
+      ),
     );
   }
 }
