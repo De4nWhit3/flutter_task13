@@ -37,7 +37,15 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: const Color.fromARGB(255, 70, 207, 74),
         title: Text(widget.title),
       ),
-      body: QuestionScreenWidget(),
+      body: Padding(
+        padding: const EdgeInsets.only(
+          top: 10.0,
+          bottom: 10.0,
+          left: 20,
+          right: 20,
+        ),
+        child: QuestionScreenWidget(),
+      ),
       backgroundColor: const Color.fromARGB(255, 119, 248, 123),
     );
   }
