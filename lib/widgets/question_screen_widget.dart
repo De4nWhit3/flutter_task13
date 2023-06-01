@@ -182,6 +182,8 @@ class _FruitCheckboxState extends State<FruitCheckbox> {
     return ListTile(
       leading: Checkbox(
           value: _selected,
+          fillColor: MaterialStateColor.resolveWith(
+              (states) => const Color.fromARGB(255, 63, 255, 25)),
           onChanged: (bool? value) {
             setState(() {
               _selected = value ?? false;
